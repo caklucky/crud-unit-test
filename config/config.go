@@ -13,10 +13,10 @@ type Config struct {
 
 const (
 	username string = "root"
-	password string = "tes!"
-	database string = "Test"
+	password string = "kryptopos!"
+	database string = "golang"
 	host     string = "localhost"
-	port     string = "3308"
+	port     string = "3306"
 )
 
 var (

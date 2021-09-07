@@ -2,7 +2,6 @@ package Service
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/caklucky/crud-unit-test/models"
 )
@@ -20,7 +19,6 @@ func NewEmployeeService(repo models.EmployeeRepository) EmployeeService {
 func (e *EmployeeService) LihatPegawai() (employees []models.Employee, err error) {
 
 	employees, err = e.Repo.Find()
-	fmt.Println("di service -->", e.Repo)
 	return employees, err
 }
 
