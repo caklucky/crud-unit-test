@@ -7,6 +7,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+type Config struct {
+	Db *sql.DB
+}
+
 const (
 	username string = "root"
 	password string = "kryptopos!"
@@ -19,7 +23,11 @@ var (
 	dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", username, password, host, port, database)
 )
 
-func Connect() (*sql.DB, error) {
+func NewConfig() *Config {
+	return &Config{}
+}
+
+func (c *Config) Connect() (*sql.DB, error) {
 	db, err := sql.Open("mysql", dsn)
 
 	if err != nil {
