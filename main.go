@@ -40,9 +40,16 @@ func main() {
 
 	// update pegawai
 	pegawai.Name = "Lucky Fernanda RRRR"
-	employeeService.UpdatePegawai(pegawai)
-	// delete pegawai
+	err := employeeService.UpdatePegawai(pegawai)
+	if err != nil {
+		fmt.Println(err)
+	}
 
+	// delete pegawai
+	err = employeeService.HapusPegawai(pegawai.ID)
+	if err != nil {
+		fmt.Println(err)
+	}
 	// lihat pegawai
-	// fmt.Println(employeeService.LihatPegawai())
+	fmt.Println(employeeService.LihatPegawai())
 }

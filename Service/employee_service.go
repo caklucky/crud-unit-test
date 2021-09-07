@@ -37,6 +37,7 @@ func (e *EmployeeService) UpdatePegawai(employee models.Employee) (err error) {
 	return
 }
 
-func (e *EmployeeService) HapusPegawai(id string) {
-
+func (e *EmployeeService) HapusPegawai(id string) (err error) {
+	err = e.Repo.Delete(id)
+	return
 }

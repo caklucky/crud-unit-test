@@ -74,8 +74,7 @@ func (e *EmployeeRepository) Insert(employee models.Employee) (err error) {
 }
 
 func (e *EmployeeRepository) Update(employee models.Employee) (err error) {
-	fmt.Println(employee)
-	queryText := fmt.Sprintf("UPDATE %s set name = %s, phone ='%s', gender = '%s' where id = '%s'",
+	queryText := fmt.Sprintf("UPDATE %s set name = '%s', phone ='%s', gender = '%s' where id = '%s'",
 		table,
 		employee.Name,
 		employee.Phone,
