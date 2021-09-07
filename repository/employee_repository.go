@@ -17,8 +17,8 @@ const (
 	table = "employees"
 )
 
-func NewEmployee(db *sql.DB) EmployeeRepository {
-	return EmployeeRepository{
+func NewEmployee(db *sql.DB) models.EmployeeRepository {
+	return &EmployeeRepository{
 		Db: db,
 	}
 }

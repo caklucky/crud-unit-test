@@ -4,14 +4,13 @@ import (
 	"errors"
 
 	"github.com/caklucky/crud-unit-test/models"
-	"github.com/caklucky/crud-unit-test/repository"
 )
 
 type EmployeeService struct {
-	Repo repository.EmployeeRepository
+	Repo models.EmployeeRepository
 }
 
-func NewEmployeeService(repo repository.EmployeeRepository) EmployeeService {
+func NewEmployeeService(repo models.EmployeeRepository) EmployeeService {
 	return EmployeeService{
 		Repo: repo,
 	}
