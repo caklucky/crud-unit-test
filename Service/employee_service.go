@@ -28,12 +28,16 @@ func (e *EmployeeService) TambahPegawai(emp models.Employee) (employee models.Em
 	return
 }
 
-func (e *EmployeeService) UpdatePegawai(employee models.Employee) (err error) {
-	pegawai, _ := e.Repo.FindById(employee.ID)
+func (e *EmployeeService) UpdatePegawai(emp models.Employee) (employee models.Employee, err error) {
+	pegawai, _ := e.Repo.FindById(emp.ID)
 	if pegawai == (models.Employee{}) {
-		return errors.New("id not found ")
+		return models.Employee{}, errors.New("id not found ")
 	}
-	err = e.Repo.Update(employee)
+	err = e.Repo.Update(emp)
+	if err != nil {
+		return models.Employee{}, errors.New("update error ")
+	}
+	employee, err = e.Repo.FindById(emp.ID)
 	return
 }
 

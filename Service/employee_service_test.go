@@ -99,31 +99,35 @@ func TestEmployeeService_UpdatePegawaiNotSuccess(t *testing.T) {
 	error := errors.New("id not found ")
 	repo.Mock.On("FindById", ekspetasi.ID).Return(models.Employee{}, nil).Once()
 
-	err := service.UpdatePegawai(ekspetasi)
+	emp, err := service.UpdatePegawai(ekspetasi)
 	assert.Error(t, err)
 	assert.EqualError(t, error, err.Error())
+	assert.NotEqual(t, ekspetasi.ID, emp.ID)
 
 }
-func TestEmployeeService_DeletePegawaiNotSuccess(t *testing.T) {
+func TestEmployeeService_UpdatePegawaiSuccess(t *testing.T) {
 	repo := new(repository.EmployeeRepositoryMock)
 	service := NewEmployeeService(repo)
 	ekspetasi := models.Employee{
-		Name:   "sukijan",
+		Name:   "sukro",
 		ID:     "1",
 		Gender: "M",
 		Phone:  "08112002211",
 	}
-	repo.Mock.On("FindById", ekspetasi.ID).Return(ekspetasi, nil).Once()
+
+	repo.Mock.On("FindById", mock.AnythingOfType("string")).Return(ekspetasi, nil)
 	repo.Mock.On("Update", mock.AnythingOfType("models.Employee")).Return(nil).Once()
 
-	err := service.UpdatePegawai(ekspetasi)
+	emp, err := service.UpdatePegawai(ekspetasi)
 	assert.NoError(t, err)
+	assert.NotNil(t, emp)
+	assert.Equal(t, ekspetasi.Name, emp.Name)
 }
 func TestEmployeeService_HapusPegawaiNotFound(t *testing.T) {
 	repo := new(repository.EmployeeRepositoryMock)
 	service := NewEmployeeService(repo)
 	error := errors.New("id not found ")
-	repo.Mock.On("Delete", "1").Return(error).Once()
+	repo.Mock.On("Delete", mock.AnythingOfType("string")).Return(error).Once()
 
 	err := service.HapusPegawai("1")
 	assert.Error(t, err)
@@ -132,7 +136,7 @@ func TestEmployeeService_HapusPegawaiNotFound(t *testing.T) {
 func TestEmployeeService_HapusPegawaiSuccess(t *testing.T) {
 	repo := new(repository.EmployeeRepositoryMock)
 	service := NewEmployeeService(repo)
-	repo.Mock.On("Delete", "1").Return(nil).Once()
+	repo.Mock.On("Delete", mock.AnythingOfType("string")).Return(nil).Once()
 
 	err := service.HapusPegawai("1")
 	assert.NoError(t, err)
